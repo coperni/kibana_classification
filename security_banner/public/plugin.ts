@@ -1,5 +1,5 @@
 import { i18n } from '@kbn/i18n';
-import $ from 'jquery';
+//import $ from 'jquery';
 import {CoreSetup, CoreStart, Plugin, PluginInitializerContext } from '../../../src/core/public';
 import {
   SecurityBannerPluginSetup,
@@ -16,41 +16,41 @@ export class SecurityBannerPlugin
   public setup(core: CoreSetup): SecurityBannerPluginSetup {
     const config = this.initializerContext.config.get<ClientConfigType>();
 
-    // Register an application into the side navigation menu
-    // core.application.register({
-    //   id: 'securityBanner',
-    //   title: PLUGIN_NAME,
-    //   async mount(params: AppMountParameters) {
-    //     // Load application bundle
-    //     const { renderApp } = await import('./application');
-    //     // Get start services as specified in kibana.json
-    //     const [coreStart, depsStart] = await core.getStartServices();
-    //     // Render the application
-    //     return renderApp(coreStart, depsStart as AppPluginStartDependencies, params, config.text, config.bg_color);
-    //   },
-    // });
     $(document).ready( function(){
       var existCondition = setInterval(function() {
         if ($('#globalHeaderBars').length) {
            console.log("Exists!");
            clearInterval(existCondition);
-           $('#globalHeaderBars').prepend('<h5 style="text-align:center;background-color:green">sdsd</h5>');
+           $('.euiHeader--dark').before(`"<div id='top-banner' style='
+           width: 100%; 
+           position: fixed; 
+           z-index: 1040;
+           white-space: nowrap; 
+           top:0;'>
+           <h5 class='banner-text' 
+                style='background-color: ${config.bg_color} !important; 
+                color: ${config.fg_color}; text-align: center; 
+                font-family: Ropa Sans, sans-serif !important; 
+                margin-bottom: 0.5px; 
+                margin-top: 0px;'>${config.text}</h5></div>"`);
+          $('.euiHeader--dark').css({marginTop: '0.85%'});
+          $('.euiHeader--default').css({marginTop: '0.8%'});
+          $('.banner-text').css("line-height", 1.2);
+          $('.content').append(`"<div id='bottom-banner' style='
+          width: 100%; 
+          position: fixed; 
+          z-index: 1040;
+          white-space: nowrap; 
+          bottom:0;'>
+          <h5 class='banner-text' 
+               style='background-color: ${config.bg_color} !important; 
+               color: ${config.fg_color}; text-align: center; 
+               font-family: Ropa Sans, sans-serif !important; 
+               margin-bottom: 0.5px; 
+               margin-top: 0px;'>${config.text}</h5></div>"`);
         }
        }, 100); // check every 100ms
     });
-
-    const top_banner = { style : {
-      color: "white",
-      backgroundColor: config.bg_color,
-      position: "fixed",
-      top: 0,
-      left: 0,
-      right: 0,
-      zIndex: 11000,
-      textAlign: "center"
-      },
-    id : 'classificationBanner',
-    className: 'topBanner'};
 
 
     // Return methods that should be available to other plugins
