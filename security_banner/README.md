@@ -1,19 +1,19 @@
-# securityBanner
+# sessionLogout
 
-A Kibana plugin
+A Kibana plugin for version 7.10.2.
 
 ---
 
-## Development
+## Installation
 
-See the [kibana contributing guide](https://github.com/elastic/kibana/blob/master/CONTRIBUTING.md) for instructions setting up your development environment.
+```
+/usr/share/kibana/bin/kibana-plugin install file:///usr/share/kibana/securityBanner-7.10.2.zip
+```
 
-## Scripts
+## Usage
 
-<dl>
-  <dt><code>yarn kbn bootstrap</code></dt>
-  <dd>Execute this to install node_modules and setup the dependencies in your plugin and in Kibana</dd>
-
-  <dt><code>yarn plugin-helpers build</code></dt>
-  <dd>Execute this to create a distributable version of this plugin that can be installed in Kibana</dd>
-</dl>
+```
+security_banner.text: 'CLASSIFICATION LEVEL'
+security_banner.fg_color: 'white' # Text color
+security_banner.bg_color: 'green' # Banner color
+```

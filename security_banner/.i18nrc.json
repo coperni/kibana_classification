@@ -2,6 +2,5 @@
   "prefix": "securityBanner",
   "paths": {
     "securityBanner": "."
-  },
-  "translations": ["translations/ja-JP.json"]
+  }
 }
